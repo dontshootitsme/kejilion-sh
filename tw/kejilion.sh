@@ -634,7 +634,7 @@ while true; do
 	case $sub_choice in
 		1)
 			send_stats "拉取鏡像"
-			read -e -p "请输入镜像名（多个镜像名请用空格分隔）: " imagenames
+			read -e -p "請輸入鏡像名稱（多個鏡像名稱請以空格分隔）:" imagenames
 			for name in $imagenames; do
 				echo -e "${gl_kjlan}正在取得鏡像:$name${gl_bai}"
 				docker pull $name
@@ -917,7 +917,7 @@ close_port() {
 allow_ip() {
 	local ips=($@)  # 将传入的参数转换为数组
 	if [ ${#ips[@]} -eq 0 ]; then
-		echo "请提供至少一个IP地址或IP段"
+		echo "請提供至少一個IP位址或IP段"
 		return 1
 	fi
 
@@ -1019,7 +1019,7 @@ manage_country_rules() {
 				fi
 
 				if ! wget -q "$download_url" -O "${country_code,,}.zone"; then
-					echo "錯誤：下載$country_code 的 IP 区域文件失败"
+					echo "錯誤：下載$country_code的 IP 區域檔案失敗"
 					continue
 				fi
 
@@ -1029,7 +1029,7 @@ manage_country_rules() {
 
 				iptables -I INPUT -m set --match-set "$ipset_name" src -j DROP
 
-				echo "已成功阻止 $country_code的 IP 位址"
+				echo "已成功阻止$country_code的 IP 位址"
 				rm "${country_code,,}.zone"
 				;;
 
@@ -1118,7 +1118,7 @@ iptables_panel() {
 				  send_stats "開放指定連接埠"
 				  ;;
 			  2)
-				  read -e -p "请输入关闭的端口号: " c_port
+				  read -e -p "請輸入關閉的連接埠號碼:" c_port
 				  close_port $c_port
 				  send_stats "關閉指定連接埠"
 				  ;;
@@ -1543,7 +1543,7 @@ certs_status() {
 		echo -e "${gl_hong}注意:${gl_bai}證書申請失敗，請檢查以下可能原因並重試："
 		echo -e "1. 網域拼字錯誤 ➠ 請檢查網域名稱輸入是否正確"
 		echo -e "2. DNS解析問題 ➠ 確認網域名稱已正確解析至本伺服器IP"
-		echo -e "3. 网络配置问题 ➠ 如使用Cloudflare Warp等虚拟网络请暂时关闭"
+		echo -e "3. 網路設定問題 ➠ 如使用Cloudflare Warp等虛擬網路請暫時關閉"
 		echo -e "4. 防火牆限制 ➠ 檢查80/443連接埠是否開放，確保驗證可存取"
 		echo -e "5. 申請次數超限 ➠ Let's Encrypt有每週限額(5次/網域/週)"
 		echo -e "6. 國內備案限制 ➠ 中國大陸環境請確認網域是否備案"
@@ -3219,7 +3219,7 @@ f2b_sshd() {
 	fi
 }
 
-# 基础参数配置：封禁时长(bantime)、时间窗口(findtime)、重试次数(maxretry)
+# 基礎參數配置：封禁時長(bantime)、時間視窗(findtime)、重試次數(maxretry)
 # 說明：
 # - 優先寫入 /etc/fail2ban/jail.d/sshd.local（覆蓋預設 jail 配置，升級不易丟）
 # - 若是 Alpine 且 jail 名稱不同，仍寫 sshd.local；Fail2Ban 會以 jail 名稱配對
@@ -3240,7 +3240,7 @@ f2b_basic_config() {
 		fi
 	fi
 
-	echo "即将配置 SSH jail：$jail_name"
+	echo "即將配置 SSH jail：$jail_name"
 	read -e -p "封禁時長 bantime (秒/分鐘/小時，如 3600 或 1h) [預設 1h]:" bantime
 	read -e -p "時間窗口 findtime (秒/分鐘/小時，如 600 或 10m) [預設 10m]:" findtime
 	read -e -p "重試次數 maxretry (整數) [預設 5]:" maxretry
@@ -3890,7 +3890,7 @@ ldnmp_web_status() {
 			2)
 				send_stats "克隆站點域名"
 				read -e -p "請輸入舊網域名稱:" oddyuming
-				read -e -p "請輸入新網域:" yuming
+				read -e -p "請輸入新網域名稱:" yuming
 				install_certbot
 				install_ssltls
 				certs_status
@@ -3931,7 +3931,7 @@ ldnmp_web_status() {
 				send_stats "建立關聯站點"
 				echo -e "為現有的站點再關聯一個新網域用於訪問"
 				read -e -p "請輸入現有的網域名稱:" oddyuming
-				read -e -p "請輸入新網域:" yuming
+				read -e -p "請輸入新網域名稱:" yuming
 				install_certbot
 				install_ssltls
 				certs_status
@@ -4355,7 +4355,7 @@ frps_panel() {
 		fi
 		echo ""
 		echo "------------------------"
-		echo "1. 安装                  2. 更新                  3. 卸载"
+		echo "1. 安裝 2. 更新 3. 卸載"
 		echo "------------------------"
 		echo "5. 內部網路服務網域存取 6. 刪除網域名稱訪問"
 		echo "------------------------"
@@ -7980,7 +7980,7 @@ linux_tools() {
 
 		  32)
 			  clear
-			  send_stats "全部安装（不含游戏和屏保）"
+			  send_stats "全部安裝（不含遊戲和螢幕保護程式）"
 			  install curl wget sudo socat htop iftop unzip tar tmux ffmpeg btop ranger ncdu fzf vim nano git
 			  ;;
 
@@ -7995,7 +7995,7 @@ linux_tools() {
 
 		  41)
 			  clear
-			  read -e -p "请输入安装的工具名（wget curl sudo htop）: " installname
+			  read -e -p "請輸入已安裝的工具名稱（wget curl sudo htop）:" installname
 			  install $installname
 			  send_stats "安裝指定軟體"
 			  ;;
@@ -9041,7 +9041,7 @@ local db_output="${gl_lv}${db_count}${gl_bai}"
 if command -v docker &>/dev/null; then
 	if docker ps --filter "name=nginx" --filter "status=running" | grep -q nginx; then
 		echo -e "${gl_huang}------------------------"
-		echo -e "${gl_lv}环境已安装${gl_bai}站點:$output資料庫:$db_output"
+		echo -e "${gl_lv}環境已安裝${gl_bai}站點:$output資料庫:$db_output"
 	fi
 fi
 
@@ -10409,7 +10409,7 @@ for name, provider in list(providers.items()):
         continue
 
     if api not in SUPPORTED_APIS:
-        summary.append(f'🔁 {name}: 发现非法协议 {api or "(unset)"}，将重新探测')
+        summary.append(f'🔁 {name}: 發現非法協定 {api or "(unset)"}，將重新探測')
         provider['api'] = ''
         api = ''
         changed = True
@@ -10425,7 +10425,7 @@ for name, provider in list(providers.items()):
                 summary.append(f'✅ {name}: 使用者已確認刪除該 provider 及全部相關模型引用')
         else:
             send_stat('OpenClaw API刪失敗Provider-拒絕')
-            summary.append(f'ℹ️ {name}: 用户未确认删除，保留现有 provider 配置')
+            summary.append(f'ℹ️ {name}: 使用者未確認刪除，保留現有 provider 配置')
         continue
 
     if attempts > 1:
@@ -10941,7 +10941,7 @@ try:
     with open(path, 'r', encoding='utf-8') as f:
         obj = json.load(f)
 except FileNotFoundError:
-    print('MSG\tℹ️ 未找到 openclaw.json，请先完成安装/初始化。')
+    print('MSG\tℹ️ 未找到 openclaw.json，請先完成安裝/初始化。')
     raise SystemExit(0)
 except Exception as e:
     print(f'MSG\t❌ 讀取設定失敗: {type(e).__name__}: {e}')
@@ -11467,7 +11467,7 @@ PY
 				start_gateway
 				;;
 			2)
-				echo "❌ 删除失败：provider 不存在"
+				echo "❌ 刪除失敗：provider 不存在"
 				;;
 			3)
 				send_stats "OpenClaw API刪除取消"
@@ -14269,7 +14269,7 @@ EOF
 	}
 
 	openclaw_memory_deep_status() {
-		echo "正在探测嵌入模型就绪状态..."
+		echo "正在探測嵌入模型就緒狀態..."
 		openclaw memory status --deep
 	}
 
@@ -14668,7 +14668,7 @@ except Exception:
 		openclaw_permission_update_exec_approvals "allowlist" "on-miss" "deny"
 
 		openclaw_permission_restart_gateway
-		echo -e "${gl_lv}✅ 已切换为标准安全模式 (所有危险命令将通过UI/TG请求你的审批)${gl_bai}"
+		echo -e "${gl_lv}✅ 已切換為標準安全模式 (所有危險命令將透過UI/TG請求你的批准)${gl_bai}"
 	}
 
 	openclaw_permission_apply_developer() {
@@ -15147,7 +15147,7 @@ for idx,item in enumerate(bindings,1):
 		local agent_id bind_value confirm
 		read -e -p "請輸入智能體 ID:" agent_id
 		read -e -p "請輸入路由綁定值（如 telegram:ops / discord:guild-a）:" bind_value
-		{ [ -z "$agent_id" ] || [ -z "$bind_value" ]; } && echo "已取消：參數不能為空​​。" && return 1
+		{ [ -z "$agent_id" ] || [ -z "$bind_value" ]; } && echo "已取消：参数不能为空。" && return 1
 		echo "將綁定智能體 [$agent_id] -> [$bind_value]"
 		read -e -p "輸入 yes 確認繼續:" confirm
 		[ "$confirm" = "yes" ] || { echo "已取消"; return 1; }
@@ -15423,7 +15423,7 @@ openclaw_backup_restore_menu() {
 
 		domains=$(openclaw_find_webui_domain)
 		if [ -n "$domains" ]; then
-			echo "網域地址："
+			echo "網域名稱地址："
 			echo "$domains" | while read d; do
 				echo "https://${d}/#token=${token}"
 			done
@@ -15657,7 +15657,7 @@ while true; do
 	  echo -e "${gl_kjlan}97.  ${color97}WireGuard組網(服務端)${gl_kjlan}98.  ${color98}WireGuard組網(客戶端)"
 	  echo -e "${gl_kjlan}99.  ${color99}DSM群暉虛擬機${gl_kjlan}100. ${color100}Syncthing點對點檔案同步工具"
 	  echo -e "${gl_kjlan}-------------------------"
-	  echo -e "${gl_kjlan}101. ${color101}AI影片產生工具${gl_kjlan}102. ${color102}VoceChat多人線上聊天系統"
+	  echo -e "${gl_kjlan}101. ${color101}AI影片生成工具${gl_kjlan}102. ${color102}VoceChat多人線上聊天系統"
 	  echo -e "${gl_kjlan}103. ${color103}Umami網站統計工具${gl_kjlan}104. ${color104}Stream四層代理轉送工具"
 	  echo -e "${gl_kjlan}105. ${color105}思源筆記${gl_kjlan}106. ${color106}Drawnix開源白板工具"
 	  echo -e "${gl_kjlan}107. ${color107}PanSou網盤搜尋${gl_kjlan}108. ${color108}LangBot聊天機器人"
@@ -17094,7 +17094,7 @@ while true; do
 			ip_address
 			echo "已經安裝完成"
 			check_docker_app_ip
-			echo "初始使用者名稱密碼均為: admin"
+			echo "初始使用者名稱密碼皆為: admin"
 		}
 
 		docker_app_update() {
@@ -18923,7 +18923,7 @@ while true; do
 
 	  101|moneyprinterturbo)
 		local app_id="101"
-		local app_name="AI影片產生工具"
+		local app_name="AI影片生成工具"
 		local app_text="MoneyPrinterTurbo是一款使用AI大模型合成高清短影片的工具"
 		local app_url="官方網站:${gh_https_url}github.com/harry0703/MoneyPrinterTurbo"
 		local docker_name="moneyprinterturbo"
@@ -20932,7 +20932,7 @@ EOF
 			  echo "TG-bot監控預警功能"
 			  echo "影片介紹: https://youtu.be/vLL-eb3Z_TY"
 			  echo "------------------------------------------------"
-			  echo "您需要設定tg機器人API和接收預警的用戶ID，即可實現本機CPU，內存，硬碟，流量，SSH登入的即時監控預警"
+			  echo "您需要設定tg機器人API和接收預警的使用者ID，即可實現本機CPU，內存，硬碟，流量，SSH登入的即時監控預警"
 			  echo "到達閾值後會向用戶發送預警訊息"
 			  echo -e "${gl_hui}-關於流量，重啟伺服器將重新計算-${gl_bai}"
 			  read -e -p "確定繼續嗎？ (Y/N):" choice
@@ -21788,7 +21788,7 @@ while true; do
 				yinsiyuanquan2
 				cp -f ~/kejilion.sh /usr/local/bin/k > /dev/null 2>&1
 				ln -sf /usr/local/bin/k /usr/bin/k > /dev/null 2>&1
-				echo -e "${gl_lv}腳本已更新至最新版本！${gl_huang}v$sh_v_new${gl_bai}"
+				echo -e "${gl_lv}腳本已更新到最新版本！${gl_huang}v$sh_v_new${gl_bai}"
 				send_stats "腳本已經最新$sh_v_new"
 			else
 				rm -f "$tmp_file"
@@ -21796,7 +21796,7 @@ while true; do
 				if [ -f ~/kejilion.sh.bak ]; then
 					mv -f ~/kejilion.sh.bak ~/kejilion.sh
 				fi
-				echo -e "${gl_hong}更新失敗！下載出錯或檔案校驗不通過，已恢復原始版本${gl_bai}"
+				echo -e "${gl_hong}更新失敗！下載出錯或檔案校驗不通過，已恢復原版本${gl_bai}"
 				send_stats "腳本更新失敗"
 			fi
 			break_end
